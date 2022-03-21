@@ -1,9 +1,22 @@
-import React from "react";
+import React, {useRef} from 'react';
+import Countdown from 'react-countdown';
 
-class Timer extends React.Component{
-    render() {
-        return <div>Timer</div>
-    }
+function Timer(props) {
+    const clockRef = useRef();
+    const handleStart = () => clockRef.current.start();
+
+    const startingPoint = props.time * 1000 * 60;
+
+    return (
+        <>
+            <Countdown date={Date.now() + startingPoint}
+                       ref={clockRef}
+                       autoStart={false}/>
+            <button onClick={handleStart}>
+                Start Clock
+            </button>
+        </>
+    );
 }
 
 export default Timer;
